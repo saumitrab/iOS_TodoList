@@ -19,6 +19,10 @@
 		A6B4EAB517ADDADB00F3BF49 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6B4EA9D17ADDADB00F3BF49 /* UIKit.framework */; };
 		A6B4EABD17ADDADB00F3BF49 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A6B4EABB17ADDADB00F3BF49 /* InfoPlist.strings */; };
 		A6B4EABF17ADDADB00F3BF49 /* ToDo_ListTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B4EABE17ADDADB00F3BF49 /* ToDo_ListTests.m */; };
+		A6B4EAD017ADDBEC00F3BF49 /* TodoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B4EACE17ADDBEC00F3BF49 /* TodoViewController.m */; };
+		A6B4EAD117ADDBEC00F3BF49 /* TodoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6B4EACF17ADDBEC00F3BF49 /* TodoViewController.xib */; };
+		A6B4EAD417B00DD500F3BF49 /* TodoCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B4EAD317B00DD500F3BF49 /* TodoCustomCell.m */; };
+		A6B4EAD617B00E2500F3BF49 /* TodoCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6B4EAD517B00E2500F3BF49 /* TodoCustomCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +52,12 @@
 		A6B4EABA17ADDADB00F3BF49 /* ToDo ListTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ToDo ListTests-Info.plist"; sourceTree = "<group>"; };
 		A6B4EABC17ADDADB00F3BF49 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A6B4EABE17ADDADB00F3BF49 /* ToDo_ListTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ToDo_ListTests.m; sourceTree = "<group>"; };
+		A6B4EACD17ADDBEC00F3BF49 /* TodoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodoViewController.h; sourceTree = "<group>"; };
+		A6B4EACE17ADDBEC00F3BF49 /* TodoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodoViewController.m; sourceTree = "<group>"; };
+		A6B4EACF17ADDBEC00F3BF49 /* TodoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TodoViewController.xib; sourceTree = "<group>"; };
+		A6B4EAD217B00DD500F3BF49 /* TodoCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodoCustomCell.h; sourceTree = "<group>"; };
+		A6B4EAD317B00DD500F3BF49 /* TodoCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodoCustomCell.m; sourceTree = "<group>"; };
+		A6B4EAD517B00E2500F3BF49 /* TodoCustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TodoCustomCell.xib; path = ../TodoCustomCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +121,12 @@
 				A6B4EAA917ADDADB00F3BF49 /* AppDelegate.m */,
 				A6B4EAAB17ADDADB00F3BF49 /* Images.xcassets */,
 				A6B4EAA017ADDADB00F3BF49 /* Supporting Files */,
+				A6B4EACD17ADDBEC00F3BF49 /* TodoViewController.h */,
+				A6B4EACE17ADDBEC00F3BF49 /* TodoViewController.m */,
+				A6B4EACF17ADDBEC00F3BF49 /* TodoViewController.xib */,
+				A6B4EAD217B00DD500F3BF49 /* TodoCustomCell.h */,
+				A6B4EAD317B00DD500F3BF49 /* TodoCustomCell.m */,
+				A6B4EAD517B00E2500F3BF49 /* TodoCustomCell.xib */,
 			);
 			path = "ToDo List";
 			sourceTree = "<group>";
@@ -219,8 +235,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6B4EAD617B00E2500F3BF49 /* TodoCustomCell.xib in Resources */,
 				A6B4EAA417ADDADB00F3BF49 /* InfoPlist.strings in Resources */,
 				A6B4EAAC17ADDADB00F3BF49 /* Images.xcassets in Resources */,
+				A6B4EAD117ADDBEC00F3BF49 /* TodoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +257,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6B4EAD417B00DD500F3BF49 /* TodoCustomCell.m in Sources */,
+				A6B4EAD017ADDBEC00F3BF49 /* TodoViewController.m in Sources */,
 				A6B4EAAA17ADDADB00F3BF49 /* AppDelegate.m in Sources */,
 				A6B4EAA617ADDADB00F3BF49 /* main.m in Sources */,
 			);

@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "TodoViewController.h"
 
 @implementation AppDelegate
 
@@ -14,6 +15,18 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    
+    // Allocate space for TodoViewController
+    
+    UIViewController *todoViewController = [[TodoViewController alloc] init];
+    
+    // Define a navigation controller
+    
+    UINavigationController *todoNavigationController = [[UINavigationController alloc] initWithRootViewController:todoViewController];
+    
+    self.window.rootViewController = todoNavigationController;
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
