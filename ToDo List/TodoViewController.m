@@ -35,6 +35,8 @@
     self.todoTableView.dataSource = self;
     
     self.todoListArray = [[NSMutableArray alloc] init];
+    [self.todoListArray addObject:@"Todo Item1"];
+    [self.todoListArray addObject:@"added item"];
     
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
@@ -49,31 +51,15 @@
 }
 
 - (void)addTodoItem {
-    TodoCustomCell *newCustomCell = [[TodoCustomCell alloc] init];
-    newCustomCell.textfieldNewTodoItem.text = @"test";
-    [self.todoListArray insertObject:newCustomCell atIndex:0];
+    [self.todoListArray insertObject:@"" atIndex:0];
     [self.todoTableView reloadData];
-    //NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    //[self.todoTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition: UITableViewScrollPositionNone];
- 
-    //TodoCustomCell *cell = (TodoCustomCell *)[self.todoTableView cellForRowAtIndexPath:0];
-    //[cell becomeFirstResponder];
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    TodoCustomCell *cell = (TodoCustomCell *)[self.todoTableView cellForRowAtIndexPath:indexPath];
+    [cell.textfieldNewTodoItem becomeFirstResponder];
 }
-
-/*
-- (void) updatedCellCustomCell:(TodoCustomCell *)customCell {
-    NSString *todo = [[NSString alloc] initWithString:customCell.textfieldNewTodoItem.text];
-}
-
-
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    TodoCustomCell *customcell = (TodoCustomCell *)[self.todoTableView cellForRowAtIndexPath:indexPath];
-    NSString *todo = [[NSString alloc] initWithString:customcell.textfieldNewTodoItem.text];
-}
- */
 
 -(void) todoEditingDone {
-    //Hack: Update first cell info in data array
     [self.view endEditing:YES];
 }
 
@@ -82,16 +68,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
--( void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //[self.navigationController pushViewController:[[TodoCustomCell alloc] init] animated:YES];
-    
-    //static NSString *CustomCellIdentifier = @"CustomCell";
-    
-    //TodoCustomCell *customCell = [[TodoCustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CustomCellIdentifier];
-}
-*/
 
 #pragma mark - Table view data source
 
@@ -111,18 +87,32 @@
     static NSString *CellIdentifier = @"TodoCustomCell";
     TodoCustomCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    //cell.textfieldNewTodoItem.text = [self.todoListArray objectAtIndex:indexPath.row];
+    cell.textfieldNewTodoItem.text = [self.todoListArray objectAtIndex:indexPath.row];
     
+    cell.textfieldNewTodoItem.delegate = self;
+    cell.textfieldNewTodoItem.tag = indexPath.row;
+
     return cell;
 }
 
 
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    self.todoListArray[textField.tag] = textField.text;
+    [self.view endEditing:YES];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    self.todoListArray[textField.tag] = textField.text;
+    [self.view endEditing:YES];
+    return YES;
+}
+
  // Override to support conditional editing of the table view.
  - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
+{
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
+}
 
 
  // Override to support editing the table view.
@@ -131,49 +121,31 @@
  if (editingStyle == UITableViewCellEditingStyleDelete) {
      // Delete the row from the data source
      [self.todoListArray removeObjectAtIndex:indexPath.row];
-     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+     [tableView reloadData];
+     //[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
  }
  else if (editingStyle == UITableViewCellEditingStyleInsert) {
      // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     //TodoCustomCell *cell = (TodoCustomCell *)[self.todoTableView cellForRowAtIndexPath:indexPath];
-     //NSString *todo = [[NSString alloc] initWithString:cell.textfieldNewTodoItem.text];
     }
  }
 
+-(void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    [super setEditing:editing animated:YES];
+    [self.todoTableView setEditing:editing animated:YES];
+}
 
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
- }
+// Override to support conditional rearranging of the table view.
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return NO if you do not want the item to be re-orderable.
+    return YES;
+}
 
-/*
-
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
-*/
- 
-
-/*
- #pragma mark - Table view delegate
- 
- // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
- - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Navigation logic may go here, for example:
- // Create the next view controller.
- <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
- 
- // Pass the selected object to the new view controller.
- 
- // Push the view controller.
- [self.navigationController pushViewController:detailViewController animated:YES];
- }
- 
- */
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+    NSString *temp = self.todoListArray[fromIndexPath.row];
+    self.todoListArray[fromIndexPath.row] = self.todoListArray[toIndexPath.row];
+    self.todoListArray[toIndexPath.row] = temp;
+}
 
 
 @end

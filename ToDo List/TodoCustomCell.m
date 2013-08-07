@@ -28,16 +28,4 @@
     // Configure the view for the selected state
 }
 
-
-/*
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    [textField becomeFirstResponder];
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    
-}
- */
-
-
 @end

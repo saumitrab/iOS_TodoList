@@ -8,13 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TodoViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface TodoViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) IBOutlet UITableView *todoTableView;
 
 @property (nonatomic, strong) NSMutableArray *todoListArray;
 
 - (IBAction) todoEditingDone;
-- (void) updatedCellCustomCell;
 
 @end
